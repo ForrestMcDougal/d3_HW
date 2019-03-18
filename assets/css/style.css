@@ -1,0 +1,56 @@
+.state {
+	fill: none;
+	stroke: #a9a9a9;
+	stroke-width: 1;
+}
+.state:hover {
+	fill-opacity: 0.5;
+}
+#tooltip {
+	position: absolute;
+	text-align: center;
+	padding: 20px;
+	margin: 10px;
+	font: 12px sans-serif;
+	background: lightsteelblue;
+	border: 1px;
+	border-radius: 2px;
+	pointer-events: none;
+}
+#tooltip h4 {
+	margin: 0;
+	font-size: 14px;
+}
+#tooltip {
+	background: rgba(0, 0, 0, 0.9);
+	border: 1px solid grey;
+	border-radius: 5px;
+	font-size: 12px;
+	width: auto;
+	padding: 4px;
+	color: white;
+	opacity: 0;
+}
+.no-dec {
+	text-decoration: none;
+	color: black;
+}
+svg {
+	display: block;
+	margin: auto;
+}
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%; /* Set the fixed height of the footer here */
+	height: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
+	text-align: center;
+	background-color: #f5f5f5;
+}
+
+#footer p {
+	margin: 0;
+	font-size: 16px;
+}
