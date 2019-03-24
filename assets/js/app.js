@@ -18,18 +18,19 @@ const homeState = function(page) {
       <h1 class="display-4">State Data</h1>
       <p class="lead">This site explores some basic data about the states.</p>
       <hr class="my-4">
-      <p>Fell free to look at our interactive graphs or interactive maps</p>
+			<p>Check out our interactive graphs or interactive maps using the tabs above</p>
+			<p>Data is based on 2014 ACS 1-year estimates <a href="https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml" target="_blank">found here</a>
 		</div>
   `;
 };
 
 const graphState = function(page) {
-	document.querySelector('#heading').textContent = 'Explore the Correlations';
+	document.querySelector('#heading').textContent = '';
 	document.querySelector('#content').innerHTML = `
     <div class="container">
     	<div class="row">
       	<div class="col-xs-12 col-md-12">
-        	<h1>D3Times</h1>
+        	<h3 id="correlation"></h3>
       	</div>
     	</div>
     	<div class="row">
@@ -88,7 +89,6 @@ const mapState = function(property = 'poverty') {
 		page.change(new mapState('smokes'));
 		e.preventDefault();
 	});
-	uStatesInit();
 	drawMap(property);
 };
 

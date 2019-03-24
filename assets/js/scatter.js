@@ -1,3 +1,9 @@
+String.prototype.toProperCase = function() {
+	return this.replace(/\w\S*/g, function(txt) {
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	});
+};
+
 function drawScatter() {
 	let width = parseInt(d3.select('#scatter').style('width'));
 	let height = width - width / 3.9;
@@ -128,6 +134,16 @@ function drawScatter() {
 		let curX = 'poverty';
 		let curY = 'obesity';
 
+		let corrText = d3.select('#correlation');
+		let corrX = theData.map((d) => +d[curX]);
+		let corrY = theData.map((d) => +d[curY]);
+		corrText.text(
+			`${curX.toProperCase()} and ${curY.toProperCase()} have a correlation coefficient of ${pearsonCorrelation(
+				corrX,
+				corrY
+			).toFixed(3)}`
+		);
+
 		let xMin;
 		let xMax;
 		let yMin;
@@ -136,11 +152,20 @@ function drawScatter() {
 		let toolTip = d3.tip().attr('class', 'd3-tip').offset([ 40, -60 ]).html((d) => {
 			let theX;
 			let theState = `<div>${d.state}</div>`;
-			let theY = `<div>${curY}: ${d[curY]}%</div>`;
-			if (curX === 'poverty') {
-				theX = `<div>${curX}: ${d[curX]}$</div>`;
+			let theY;
+			if (curX === 'income') {
+				theX = `<div>${curX.toProperCase()}: $${d[curX]}</div>`;
+			} else if (curX === 'age') {
+				theX = `<div>${curX.toProperCase()}: ${d[curX]}</div>`;
 			} else {
-				theX = `<div>${curX}: ${parseFloat(d[curX]).toLocaleString('en')}</div>`;
+				theX = `<div>${curX.toProperCase()}: ${parseFloat(d[curX]).toLocaleString('en')}%</div>`;
+			}
+			if (curY === 'income') {
+				theY = `<div>${curY.toProperCase()}: $${d[curY]}</div>`;
+			} else if (curY === 'age') {
+				theY = `<div>${curY.toProperCase()}: ${d[curY]}</div>`;
+			} else {
+				theY = `<div>${curY.toProperCase()}: ${parseFloat(d[curY]).toLocaleString('en')}%</div>`;
 			}
 			return theState + theX + theY;
 		});
@@ -269,6 +294,14 @@ function drawScatter() {
 					});
 					labelChange(axis, self);
 				}
+				corrX = theData.map((d) => +d[curX]);
+				corrY = theData.map((d) => +d[curY]);
+				corrText.text(
+					`${curX.toProperCase()} and ${curY.toProperCase()} have a correlation coefficient of ${pearsonCorrelation(
+						corrX,
+						corrY
+					).toFixed(3)}`
+				);
 			}
 		});
 
